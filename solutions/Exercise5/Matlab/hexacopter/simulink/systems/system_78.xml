@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<System>
+  <P Name="Location">[642, 4, 1278, 525]</P>
+  <P Name="SystemRect">[0.000000, 0.000000, 0.000000, 0.000000]</P>
+  <P Name="SetExecutionDomain">off</P>
+  <P Name="ExecutionDomainType">Deduce</P>
+  <P Name="ZoomFactor">150</P>
+  <P Name="SimulinkSubDomain">Simulink</P>
+  <Block BlockType="Inport" Name="Bv" SID="81">
+    <P Name="Position">[150, 233, 180, 247]</P>
+    <P Name="ZOrder">28</P>
+  </Block>
+  <Block BlockType="Inport" Name="Bv_ref" SID="79">
+    <P Name="Position">[150, 158, 180, 172]</P>
+    <P Name="ZOrder">-1</P>
+    <P Name="Port">2</P>
+  </Block>
+  <Block BlockType="SubSystem" Name="P velocity controller" SID="90">
+    <P Name="Ports">[2, 3]</P>
+    <P Name="Position">[250, 124, 400, 276]</P>
+    <P Name="ZOrder">33</P>
+    <P Name="LibraryVersion">1.32</P>
+    <P Name="ErrorFcn">Stateflow.Translate.translate</P>
+    <P Name="PermitHierarchicalResolution">ExplicitOnly</P>
+    <P Name="TreatAsAtomicUnit">on</P>
+    <P Name="RequestExecContextInheritance">off</P>
+    <P Name="SFBlockType">MATLAB Function</P>
+    <System Ref="system_90"/>
+  </Block>
+  <Block BlockType="Outport" Name="U_1" SID="84">
+    <P Name="Position">[510, 143, 540, 157]</P>
+    <P Name="ZOrder">22</P>
+  </Block>
+  <Block BlockType="Outport" Name="roll_ref" SID="93">
+    <P Name="Position">[510, 193, 540, 207]</P>
+    <P Name="ZOrder">35</P>
+    <P Name="Port">2</P>
+  </Block>
+  <Block BlockType="Outport" Name="pitch_ref" SID="94">
+    <P Name="Position">[510, 243, 540, 257]</P>
+    <P Name="ZOrder">36</P>
+    <P Name="Port">3</P>
+  </Block>
+  <Line>
+    <P Name="ZOrder">12</P>
+    <P Name="Src">79#out:1</P>
+    <P Name="Dst">90#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">13</P>
+    <P Name="Src">81#out:1</P>
+    <P Name="Dst">90#in:2</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">16</P>
+    <P Name="Src">90#out:1</P>
+    <P Name="Dst">84#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">17</P>
+    <P Name="Src">90#out:3</P>
+    <P Name="Dst">94#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">18</P>
+    <P Name="Src">90#out:2</P>
+    <P Name="Dst">93#in:1</P>
+  </Line>
+</System>

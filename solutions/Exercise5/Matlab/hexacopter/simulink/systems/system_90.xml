@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<System>
+  <P Name="Location">[223, 338, 826, 833]</P>
+  <P Name="SystemRect">[0.000000, 0.000000, 0.000000, 0.000000]</P>
+  <P Name="SetExecutionDomain">off</P>
+  <P Name="ExecutionDomainType">Deduce</P>
+  <P Name="SIDHighWatermark">31</P>
+  <P Name="SimulinkSubDomain">Simulink</P>
+  <Block BlockType="Inport" Name="Bv_ref" SID="90::1">
+    <P Name="Position">[20, 101, 40, 119]</P>
+    <P Name="ZOrder">-1</P>
+  </Block>
+  <Block BlockType="Inport" Name="Bv" SID="90::19">
+    <P Name="Position">[20, 136, 40, 154]</P>
+    <P Name="ZOrder">10</P>
+    <P Name="Port">2</P>
+  </Block>
+  <Block BlockType="Demux" Name=" Demux " SID="90::30">
+    <P Name="Ports">[1, 1]</P>
+    <P Name="Position">[270, 245, 320, 285]</P>
+    <P Name="ZOrder">19</P>
+    <P Name="Outputs">1</P>
+  </Block>
+  <Block BlockType="S-Function" Name=" SFunction " SID="90::29">
+    <P Name="Tag">Stateflow S-Function 6</P>
+    <P Name="Ports">[2, 4]</P>
+    <P Name="Position">[180, 102, 230, 203]</P>
+    <P Name="ZOrder">18</P>
+    <P Name="FunctionName">sf_sfun</P>
+    <P Name="PortCounts">[2 4]</P>
+    <P Name="SFunctionDeploymentMode">off</P>
+    <P Name="EnableBusSupport">on</P>
+    <P Name="SFcnIsStateOwnerBlock">off</P>
+    <Port>
+      <P Name="PortNumber">2</P>
+      <P Name="Name">U_1</P>
+    </Port>
+    <Port>
+      <P Name="PortNumber">3</P>
+      <P Name="Name">roll_ref</P>
+    </Port>
+    <Port>
+      <P Name="PortNumber">4</P>
+      <P Name="Name">pitch_ref</P>
+    </Port>
+  </Block>
+  <Block BlockType="Terminator" Name=" Terminator " SID="90::31">
+    <P Name="Position">[460, 256, 480, 274]</P>
+    <P Name="ZOrder">20</P>
+  </Block>
+  <Block BlockType="Outport" Name="U_1" SID="90::5">
+    <P Name="Position">[460, 101, 480, 119]</P>
+    <P Name="ZOrder">-5</P>
+  </Block>
+  <Block BlockType="Outport" Name="roll_ref" SID="90::25">
+    <P Name="Position">[460, 136, 480, 154]</P>
+    <P Name="ZOrder">16</P>
+    <P Name="Port">2</P>
+  </Block>
+  <Block BlockType="Outport" Name="pitch_ref" SID="90::26">
+    <P Name="Position">[460, 171, 480, 189]</P>
+    <P Name="ZOrder">17</P>
+    <P Name="Port">3</P>
+  </Block>
+  <Line>
+    <P Name="ZOrder">91</P>
+    <P Name="Src">90::1#out:1</P>
+    <P Name="Points">[120, 0]</P>
+    <P Name="Dst">90::29#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">92</P>
+    <P Name="Src">90::19#out:1</P>
+    <P Name="Dst">90::29#in:2</P>
+  </Line>
+  <Line>
+    <P Name="Name">U_1</P>
+    <P Name="ZOrder">93</P>
+    <P Name="Labels">[0, 0]</P>
+    <P Name="Src">90::29#out:2</P>
+    <P Name="Dst">90::5#in:1</P>
+  </Line>
+  <Line>
+    <P Name="Name">roll_ref</P>
+    <P Name="ZOrder">94</P>
+    <P Name="Labels">[0, 0]</P>
+    <P Name="Src">90::29#out:3</P>
+    <P Name="Dst">90::25#in:1</P>
+  </Line>
+  <Line>
+    <P Name="Name">pitch_ref</P>
+    <P Name="ZOrder">95</P>
+    <P Name="Labels">[0, 0]</P>
+    <P Name="Src">90::29#out:4</P>
+    <P Name="Dst">90::26#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">96</P>
+    <P Name="Src">90::30#out:1</P>
+    <P Name="Dst">90::31#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">97</P>
+    <P Name="Src">90::29#out:1</P>
+    <P Name="Dst">90::30#in:1</P>
+  </Line>
+</System>

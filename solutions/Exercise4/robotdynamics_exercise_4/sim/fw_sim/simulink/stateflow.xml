@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Stateflow>
+  <machine id="11">
+    <P Name="created">11-Nov-2016 18:53:21</P>
+    <P Name="isLibrary">0</P>
+    <P Name="sfVersion">80000010</P>
+    <Children>
+      <target id="50" name="sfun">
+        <P Name="description">Default Simulink S-Function Target.</P>
+      </target>
+      <chart id="12">
+        <P Name="name">Mixer//Allocation</P>
+        <P Name="windowPosition">[422 539.941 189 413]</P>
+        <P Name="viewLimits">[0 156.75 0 153.75]</P>
+        <P Name="screen">[1 1 3600 1200 1.180555555555556]</P>
+        <P Name="viewObj">12</P>
+        <P Name="ssIdHighWaterMark">5</P>
+        <P Name="decomposition">CLUSTER_CHART</P>
+        <P Name="type">EML_CHART</P>
+        <P Name="chartFileNumber">1</P>
+        <P Name="disableImplicitCasting">1</P>
+        <eml>
+          <P Name="name">fcn</P>
+        </eml>
+        <Children>
+          <state SSID="1">
+            <P Name="labelString">eML_blk_kernel()</P>
+            <P Name="position">[18 64.5 118 66]</P>
+            <P Name="fontSize">12</P>
+            <P Name="superState">SUBCHART</P>
+            <P Name="subviewer">12</P>
+            <P Name="type">FUNC_STATE</P>
+            <P Name="decomposition">CLUSTER_STATE</P>
+            <eml>
+              <P Name="isEML">1</P>
+              <P Name="script">function delta = fcn(u)
+
+% LOAD PARAMETERS
+params = parameters();
+
+% INPUT TO DEFLECTION
+delta = zeros(5,1);
+delta(1) = u(1);                    % throttle
+delta(2) = u(2) * params.deltamax;  % elevator
+delta(3) = u(3) * params.deltamax;  % aileron right
+delta(4) = -u(3) * params.deltamax; % aileron left
+delta(5) = u(4) * params.deltamax;  % rudder
+
+</P>
+              <P Name="editorLayout" Class="double">Matrix(4,1)
+[10.0, 5.0, 700.0, 500.0]</P>
+            </eml>
+          </state>
+          <data SSID="4" name="u">
+            <P Name="scope">INPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">-1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="5" name="delta">
+            <P Name="scope">OUTPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">-1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_NO</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <transition SSID="2">
+            <P Name="labelString">{eML_blk_kernel();}</P>
+            <P Name="labelPosition">[28.125 13.875 102.544 14.964]</P>
+            <P Name="fontSize">12</P>
+            <src>
+              <P Name="intersection">[0 0 1 0 23.5747 14.625 0 0]</P>
+            </src>
+            <dst>
+              <P Name="SSID">3</P>
+              <P Name="intersection">[1 0 -1 0 23.5747 42.5747 0 0]</P>
+            </dst>
+            <P Name="midPoint">[23.5747 24.9468]</P>
+            <P Name="dataLimits">[21.175 25.975 14.625 42.575]</P>
+            <P Name="subviewer">12</P>
+            <P Name="drawStyle">SMART</P>
+            <slide>
+              <P Name="sticky">BOTH_STICK</P>
+            </slide>
+            <P Name="executionOrder">1</P>
+          </transition>
+          <junction SSID="3">
+            <P Name="position">[23.5747 49.5747 7]</P>
+            <P Name="subviewer">12</P>
+            <P Name="type">CONNECTIVE_JUNCTION</P>
+          </junction>
+        </Children>
+      </chart>
+      <chart id="19">
+        <P Name="name">Vehicle Dynamics/Forces//Moments</P>
+        <P Name="windowPosition">[422 539.941 189 413]</P>
+        <P Name="viewLimits">[0 156.75 0 153.75]</P>
+        <P Name="screen">[1 1 3600 1200 1.180555555555556]</P>
+        <P Name="viewObj">19</P>
+        <P Name="ssIdHighWaterMark">10</P>
+        <P Name="decomposition">CLUSTER_CHART</P>
+        <P Name="type">EML_CHART</P>
+        <P Name="chartFileNumber">2</P>
+        <P Name="disableImplicitCasting">1</P>
+        <eml>
+          <P Name="name">fcn</P>
+        </eml>
+        <Children>
+          <state SSID="1">
+            <P Name="labelString">eML_blk_kernel()</P>
+            <P Name="position">[18 64.5 118 66]</P>
+            <P Name="fontSize">12</P>
+            <P Name="superState">SUBCHART</P>
+            <P Name="subviewer">19</P>
+            <P Name="type">FUNC_STATE</P>
+            <P Name="decomposition">CLUSTER_STATE</P>
+            <eml>
+              <P Name="isEML">1</P>
+              <P Name="script">function [F,M] = fcn(state,delta)
+
+% LOAD PARAMETERS
+params = parameters();
+
+% STATES
+u = state(1);       % x-body velocity
+v = state(2);       % y-body velocity
+w = state(3);       % z-body velocity
+p = state(4);       % roll rate
+q = state(5);       % pitch rate
+r = state(6);       % yaw rate
+
+% intermediate states (wind-frame)
+VA = sqrt(u^2+v^2+w^2);
+alpha = atan2(w,u); % angle of attack
+beta = asin(v/VA);
+
+% DEFLECTIONS
+deltaT = delta(1);
+deltaE = delta(2);
+deltaA_R = delta(3);
+deltaA_L = delta(4);
+deltaR = delta(5);
+
+% stability-to-body transform
+ca = cos(alpha);
+sa = sin(alpha);
+H_S2B = [ca, 0, -sa; 0, 1, 0; sa, 0, ca];
+
+% non-dimensionalized rates
+p_hat = p*params.b /(2*14);
+q_hat = q*params.c /(2*14);
+r_hat = r*params.b /(2*14);
+q_bar_S = 0.5*params.rho*VA^2*params.S;
+
+% aerodynamic force coefficients (stability-axis)
+% component build-up
+cD = params.cD0 + params.cDa*alpha + params.cDa2*alpha^2;
+cY_s = 0*params.cYb*beta;
+cL  = params.cL0 + params.cLa*alpha + params.cLa2*alpha^2 + ...
+    params.cLa3*alpha^3 + params.cLq*q_hat + params.cLde*deltaE;
+
+% aerodynamic moment coefficients (stability-axis)
+% component build-up
+cl_s = params.clb*beta + params.clp*p_hat + params.clr*r_hat + params.clda*deltaA_R - params.clda*deltaA_L;
+cm_s = params.cm0 + params.cma*alpha + params.cmq*q_hat + params.cmde*deltaE;
+cn_s = params.cnb*beta + params.cnp*p_hat + params.cnr*r_hat + params.cndr*deltaR;
+
+% AERODYNAMIC FORCES (body-frame)
+FA = q_bar_S * H_S2B*[-cD; cY_s; -cL];
+     
+% THRUST FORCE (body-frame)
+FT = (params.cT0 + params.cT1*deltaT + params.cT2*deltaT^2) * ...
+    [cos(params.epsilon); 0; sin(params.epsilon)];
+
+% AERODYNAMIC MOMENTS (body-frame)
+MA = q_bar_S * diag([params.b, params.c, params.b]) * [cl_s; cm_s; cn_s];
+
+% THRUST MOMENTS (body-frame)
+MT = zeros(3,1);
+
+F = FA + FT;
+M = MA + MT;
+
+
+
+</P>
+              <P Name="editorLayout" Class="double">Matrix(4,1)
+[10.0, 5.0, 700.0, 500.0]</P>
+            </eml>
+          </state>
+          <data SSID="4" name="state">
+            <P Name="scope">INPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">-1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="5" name="F">
+            <P Name="scope">OUTPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">-1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_NO</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="6" name="delta">
+            <P Name="scope">INPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">-1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+                <P Name="isSigned">1</P>
+                <P Name="wordLength">16</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_INHERITED</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="8" name="M">
+            <P Name="scope">OUTPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">-1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+                <P Name="isSigned">1</P>
+                <P Name="wordLength">16</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_NO</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <transition SSID="2">
+            <P Name="labelString">{eML_blk_kernel();}</P>
+            <P Name="labelPosition">[28.125 13.875 102.544 14.964]</P>
+            <P Name="fontSize">12</P>
+            <src>
+              <P Name="intersection">[0 0 1 0 23.5747 14.625 0 0]</P>
+            </src>
+            <dst>
+              <P Name="SSID">3</P>
+              <P Name="intersection">[1 0 -1 0 23.5747 42.5747 0 0]</P>
+            </dst>
+            <P Name="midPoint">[23.5747 24.9468]</P>
+            <P Name="dataLimits">[21.175 25.975 14.625 42.575]</P>
+            <P Name="subviewer">19</P>
+            <P Name="drawStyle">SMART</P>
+            <slide>
+              <P Name="sticky">BOTH_STICK</P>
+            </slide>
+            <P Name="executionOrder">1</P>
+          </transition>
+          <junction SSID="3">
+            <P Name="position">[23.5747 49.5747 7]</P>
+            <P Name="subviewer">19</P>
+            <P Name="type">CONNECTIVE_JUNCTION</P>
+          </junction>
+        </Children>
+      </chart>
+      <chart id="28">
+        <P Name="name">Vehicle Dynamics/Rigid-body Eqns. of Motion</P>
+        <P Name="windowPosition">[422 539.941 189 413]</P>
+        <P Name="viewLimits">[0 156.75 0 153.75]</P>
+        <P Name="screen">[1 1 3600 1200 1.180555555555556]</P>
+        <P Name="viewObj">28</P>
+        <P Name="ssIdHighWaterMark">8</P>
+        <P Name="decomposition">CLUSTER_CHART</P>
+        <P Name="type">EML_CHART</P>
+        <P Name="chartFileNumber">3</P>
+        <P Name="disableImplicitCasting">1</P>
+        <eml>
+          <P Name="name">fcn</P>
+        </eml>
+        <Children>
+          <state SSID="1">
+            <P Name="labelString">eML_blk_kernel()</P>
+            <P Name="position">[18 64.5 118 66]</P>
+            <P Name="fontSize">12</P>
+            <P Name="superState">SUBCHART</P>
+            <P Name="subviewer">28</P>
+            <P Name="type">FUNC_STATE</P>
+            <P Name="decomposition">CLUSTER_STATE</P>
+            <eml>
+              <P Name="isEML">1</P>
+              <P Name="script">function xdot = fcn(dist,force,moment,state)
+
+params = parameters();
+
+% DISTURBANCE
+wn = dist(1);       % northing wind
+we = dist(2);       % easting wind
+wd = dist(3);       % down wind
+
+% FORCES / MOMENTS
+X = force(1);       % summed forces on x-body axis
+Y = force(2);       % summed forces on y-body axis
+Z = force(3);       % summed forces on z-body axis
+Lm = moment(1);     % summed moments about x-body axis
+Mm = moment(2);     % summed moments about y-body axis
+Nm = moment(3);     % summed moments about z-body axis
+
+% STATES
+u = state(1);       % x-body velocity
+v = state(2);       % y-body velocity
+w = state(3);       % z-body velocity
+p = state(4);       % roll rate
+q = state(5);       % pitch rate
+r = state(6);       % yaw rate
+phi = state(7);     % roll angle
+theta = state(8);   % pitch angle
+psi = state(9);     % yaw angle
+
+% TRANSLATIONAL DYNAMICS
+
+% u,v,w
+udot = r*v - q*w - params.g*sin(theta) + X/params.mass;
+vdot = p*w - r*u + params.g*sin(phi)*cos(theta) + Y/params.mass;
+wdot = q*u - p*v + params.g*cos(phi)*cos(theta) + Z/params.mass;
+
+% n,e,d
+ndot = u*cos(theta)*cos(psi)+v*(sin(phi)*sin(theta)*cos(psi)-...
+    cos(phi)*sin(psi))+w*(sin(phi)*sin(psi)+cos(phi)*sin(theta)*cos(psi)) + wn;
+edot = u*cos(theta)*sin(psi)+v*(cos(phi)*cos(psi)+sin(phi)*sin(theta)*sin(psi))+...
+    w*(cos(phi)*sin(theta)*sin(psi)-sin(phi)*cos(psi)) + we;
+ddot = -u*sin(theta)+v*sin(phi)*cos(theta)+w*cos(phi)*cos(theta) + wd;
+
+% ROTATIONAL DYNAMICS
+
+% p,q,r
+pdot = (Lm+(params.Iyy-params.Izz)*r*q)/params.Ixx;
+qdot = (Mm+(params.Izz-params.Ixx)*p*r)/params.Iyy;
+rdot = (Nm+(params.Ixx-params.Iyy)*p*q)/params.Izz;
+
+% phi,theta,psi
+phidot = p + (q*sin(phi) + r*cos(phi))*tan(theta);
+thetadot = q*cos(phi) - r*sin(phi);
+psidot = (q*sin(phi) + r*cos(phi))/cos(theta);
+
+% STATE DIFFERENTIALS
+xdot = [udot;vdot;wdot;pdot;qdot;rdot;phidot;thetadot;psidot;ndot;edot;ddot];
+
+
+</P>
+              <P Name="editorLayout" Class="double">Matrix(4,1)
+[10.0, 5.0, 700.0, 500.0]</P>
+            </eml>
+          </state>
+          <data SSID="6" name="dist">
+            <P Name="scope">INPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">-1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+                <P Name="isSigned">1</P>
+                <P Name="wordLength">16</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_INHERITED</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="7" name="force">
+            <P Name="scope">INPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">-1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+                <P Name="isSigned">1</P>
+                <P Name="wordLength">16</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_INHERITED</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="8" name="moment">
+            <P Name="scope">INPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">-1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+                <P Name="isSigned">1</P>
+                <P Name="wordLength">16</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_INHERITED</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="4" name="state">
+            <P Name="scope">INPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">-1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="5" name="xdot">
+            <P Name="scope">OUTPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">-1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_NO</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <transition SSID="2">
+            <P Name="labelString">{eML_blk_kernel();}</P>
+            <P Name="labelPosition">[28.125 13.875 102.544 14.964]</P>
+            <P Name="fontSize">12</P>
+            <src>
+              <P Name="intersection">[0 0 1 0 23.5747 14.625 0 0]</P>
+            </src>
+            <dst>
+              <P Name="SSID">3</P>
+              <P Name="intersection">[1 0 -1 0 23.5747 42.5747 0 0]</P>
+            </dst>
+            <P Name="midPoint">[23.5747 24.9468]</P>
+            <P Name="dataLimits">[21.175 25.975 14.625 42.575]</P>
+            <P Name="subviewer">28</P>
+            <P Name="drawStyle">SMART</P>
+            <slide>
+              <P Name="sticky">BOTH_STICK</P>
+            </slide>
+            <P Name="executionOrder">1</P>
+          </transition>
+          <junction SSID="3">
+            <P Name="position">[23.5747 49.5747 7]</P>
+            <P Name="subviewer">28</P>
+            <P Name="type">CONNECTIVE_JUNCTION</P>
+          </junction>
+        </Children>
+      </chart>
+      <chart id="38">
+        <P Name="name">High-level Control/L1 (Lateral-directional Guidance)</P>
+        <P Name="windowPosition">[422 539.941 189 413]</P>
+        <P Name="viewLimits">[0 156.75 0 153.75]</P>
+        <P Name="screen">[1 1 3600 1200 1.180555555555556]</P>
+        <P Name="viewObj">38</P>
+        <P Name="ssIdHighWaterMark">10</P>
+        <P Name="decomposition">CLUSTER_CHART</P>
+        <P Name="type">EML_CHART</P>
+        <P Name="chartFileNumber">4</P>
+        <P Name="disableImplicitCasting">1</P>
+        <eml>
+          <P Name="name">fcn</P>
+        </eml>
+        <Children>
+          <state SSID="1">
+            <P Name="labelString">eML_blk_kernel()</P>
+            <P Name="position">[18 64.5 118 66]</P>
+            <P Name="fontSize">12</P>
+            <P Name="superState">SUBCHART</P>
+            <P Name="subviewer">38</P>
+            <P Name="type">FUNC_STATE</P>
+            <P Name="decomposition">CLUSTER_STATE</P>
+            <eml>
+              <P Name="isEML">1</P>
+              <P Name="script">function phi_ref = fcn(radius,dir,center,vG,ned,L1)
+
+% calculate lateral-directional ground speed
+ground_speed = norm(vG(1:2,1));
+
+% vector from position to center of loiter
+v_ned_to_center = center(1:2,1)-ned(1:2,1);
+ned_to_center_bearing = atan2(v_ned_to_center(2),v_ned_to_center(1));
+
+% calculate the distance from the aircraft to the circle
+dist2circ = norm(v_ned_to_center)-radius;
+abs_dist2circ = abs(dist2circ);
+
+% check that L1 vector does not exceed reasonable bounds
+if L1 &gt;= (2*radius + dist2circ)
+    L1 = 2*radius + dist2circ;
+elseif L1 &lt; abs_dist2circ
+    L1 = abs_dist2circ;
+end
+
+% calculate L1 bearing (law of cosines)
+cos_gam = (L1^2 + (dist2circ + radius)^2 - radius^2) ...
+    / 2 / L1 / (dist2circ + radius);
+if cos_gam &gt; 1, cos_gam = 1; end
+if cos_gam &lt; -1, cos_gam = -1; end;
+gam = acos(cos_gam);
+L1_bearing = ned_to_center_bearing - dir * gam;
+if (L1_bearing&gt;pi), L1_bearing = L1_bearing - 2*pi; end;
+if (L1_bearing&lt;-pi), L1_bearing = L1_bearing + 2*pi; end;
+
+% calculate error angle eta
+ground_speed_bearing = atan2(vG(2,1), vG(1,1));
+eta = L1_bearing - ground_speed_bearing;
+if (eta&gt;pi), eta = eta - 2*pi; end;
+if (eta&lt;-pi), eta = eta + 2*pi; end;
+
+% limit eta to 90 degrees
+if (eta&gt;pi/2), eta = pi/2; end;
+if (eta&lt;-pi/2), eta = -pi/2; end;
+
+% normal acceleration reference
+aN_ref = 2*ground_speed^2*sin(eta)/L1;
+
+% coordinated roll mapping
+phi_ref = atan(aN_ref/9.81);
+
+</P>
+              <P Name="editorLayout" Class="double">Matrix(4,1)
+[10.0, 5.0, 700.0, 500.0]</P>
+            </eml>
+          </state>
+          <data SSID="4" name="radius">
+            <P Name="scope">INPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="5" name="phi_ref">
+            <P Name="scope">OUTPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_NO</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="6" name="dir">
+            <P Name="scope">INPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+                <P Name="isSigned">1</P>
+                <P Name="wordLength">16</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_INHERITED</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="7" name="center">
+            <P Name="scope">INPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">3</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+                <P Name="isSigned">1</P>
+                <P Name="wordLength">16</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_INHERITED</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="8" name="vG">
+            <P Name="scope">INPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">3</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+                <P Name="isSigned">1</P>
+                <P Name="wordLength">16</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_INHERITED</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="9" name="ned">
+            <P Name="scope">INPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">3</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+                <P Name="isSigned">1</P>
+                <P Name="wordLength">16</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_INHERITED</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <data SSID="10" name="L1">
+            <P Name="scope">INPUT_DATA</P>
+            <props>
+              <array>
+                <P Name="size">1</P>
+              </array>
+              <type>
+                <P Name="method">SF_INHERITED_TYPE</P>
+                <P Name="primitive">SF_DOUBLE_TYPE</P>
+                <P Name="isSigned">1</P>
+                <P Name="wordLength">16</P>
+              </type>
+              <P Name="complexity">SF_COMPLEX_INHERITED</P>
+              <P Name="frame">SF_FRAME_INHERITED</P>
+              <unit>
+                <P Name="name">inherit</P>
+              </unit>
+            </props>
+            <P Name="dataType">Inherit: Same as Simulink</P>
+          </data>
+          <transition SSID="2">
+            <P Name="labelString">{eML_blk_kernel();}</P>
+            <P Name="labelPosition">[28.125 13.875 102.544 14.964]</P>
+            <P Name="fontSize">12</P>
+            <src>
+              <P Name="intersection">[0 0 1 0 23.5747 14.625 0 0]</P>
+            </src>
+            <dst>
+              <P Name="SSID">3</P>
+              <P Name="intersection">[1 0 -1 0 23.5747 42.5747 0 0]</P>
+            </dst>
+            <P Name="midPoint">[23.5747 24.9468]</P>
+            <P Name="dataLimits">[21.175 25.975 14.625 42.575]</P>
+            <P Name="subviewer">38</P>
+            <P Name="drawStyle">SMART</P>
+            <slide>
+              <P Name="sticky">BOTH_STICK</P>
+            </slide>
+            <P Name="executionOrder">1</P>
+          </transition>
+          <junction SSID="3">
+            <P Name="position">[23.5747 49.5747 7]</P>
+            <P Name="subviewer">38</P>
+            <P Name="type">CONNECTIVE_JUNCTION</P>
+          </junction>
+        </Children>
+      </chart>
+    </Children>
+  </machine>
+  <instance id="18">
+    <P Name="machine">11</P>
+    <P Name="name">Mixer//Allocation</P>
+    <P Name="chart">12</P>
+  </instance>
+  <instance id="27">
+    <P Name="machine">11</P>
+    <P Name="name">Vehicle Dynamics/Forces//Moments</P>
+    <P Name="chart">19</P>
+  </instance>
+  <instance id="37">
+    <P Name="machine">11</P>
+    <P Name="name">Vehicle Dynamics/Rigid-body Eqns. of Motion</P>
+    <P Name="chart">28</P>
+  </instance>
+  <instance id="49">
+    <P Name="machine">11</P>
+    <P Name="name">High-level Control/L1 (Lateral-directional Guidance)</P>
+    <P Name="chart">38</P>
+  </instance>
+</Stateflow>

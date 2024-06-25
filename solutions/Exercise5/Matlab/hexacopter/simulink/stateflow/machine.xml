@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Stateflow>
+  <machine id="13">
+    <P Name="sfVersion">80000036</P>
+    <Children>
+      <target id="69" name="sfun">
+        <P Name="description">Default Simulink S-Function Target.</P>
+      </target>
+      <chart Ref="chart_14"/>
+      <chart Ref="chart_22"/>
+      <chart Ref="chart_30"/>
+      <chart Ref="chart_40"/>
+      <chart Ref="chart_49"/>
+      <chart Ref="chart_59"/>
+    </Children>
+  </machine>
+  <instance id="21">
+    <P Name="machine">13</P>
+    <P Name="name">Vehicle Dynamics/euler angle dynamics</P>
+    <P Name="chart">14</P>
+  </instance>
+  <instance id="29">
+    <P Name="machine">13</P>
+    <P Name="name">Vehicle Dynamics/angular velocity dynamics</P>
+    <P Name="chart">22</P>
+  </instance>
+  <instance id="39">
+    <P Name="machine">13</P>
+    <P Name="name">Vehicle Dynamics/translational velocity dynamics</P>
+    <P Name="chart">30</P>
+  </instance>
+  <instance id="48">
+    <P Name="machine">13</P>
+    <P Name="name">Attitude PD controller/PD attitude controller</P>
+    <P Name="chart">40</P>
+  </instance>
+  <instance id="58">
+    <P Name="machine">13</P>
+    <P Name="name">Velocity P controller/P velocity controller</P>
+    <P Name="chart">49</P>
+  </instance>
+  <instance id="68">
+    <P Name="machine">13</P>
+    <P Name="name">Allocation/Control allocation</P>
+    <P Name="chart">59</P>
+  </instance>
+</Stateflow>

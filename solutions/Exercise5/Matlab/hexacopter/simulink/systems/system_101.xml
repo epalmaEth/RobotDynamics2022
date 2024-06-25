@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<System>
+  <P Name="Location">[501, 4, 970, 483]</P>
+  <P Name="SystemRect">[0.000000, 0.000000, 0.000000, 0.000000]</P>
+  <P Name="SetExecutionDomain">off</P>
+  <P Name="ExecutionDomainType">Deduce</P>
+  <P Name="ZoomFactor">125</P>
+  <P Name="SimulinkSubDomain">Simulink</P>
+  <Block BlockType="Inport" Name="U_1" SID="102">
+    <P Name="Position">[280, 138, 310, 152]</P>
+    <P Name="ZOrder">-1</P>
+  </Block>
+  <Block BlockType="Inport" Name="U_2" SID="110">
+    <P Name="Position">[280, 173, 310, 187]</P>
+    <P Name="ZOrder">31</P>
+    <P Name="Port">2</P>
+  </Block>
+  <Block BlockType="Inport" Name="U_3" SID="111">
+    <P Name="Position">[280, 208, 310, 222]</P>
+    <P Name="ZOrder">32</P>
+    <P Name="Port">3</P>
+  </Block>
+  <Block BlockType="Inport" Name="U_4" SID="112">
+    <P Name="Position">[280, 243, 310, 257]</P>
+    <P Name="ZOrder">33</P>
+    <P Name="Port">4</P>
+  </Block>
+  <Block BlockType="SubSystem" Name="Control allocation" SID="106">
+    <P Name="Ports">[4, 1]</P>
+    <P Name="Position">[375, 123, 525, 272]</P>
+    <P Name="ZOrder">25</P>
+    <P Name="LibraryVersion">1.32</P>
+    <P Name="ErrorFcn">Stateflow.Translate.translate</P>
+    <P Name="PermitHierarchicalResolution">ExplicitOnly</P>
+    <P Name="TreatAsAtomicUnit">on</P>
+    <P Name="RequestExecContextInheritance">off</P>
+    <P Name="SFBlockType">MATLAB Function</P>
+    <System Ref="system_106"/>
+  </Block>
+  <Block BlockType="Outport" Name="omega_p" SID="107">
+    <P Name="Position">[600, 193, 630, 207]</P>
+    <P Name="ZOrder">22</P>
+    <P Name="PortDimensions">[6,1]</P>
+    <P Name="VarSizeSig">No</P>
+  </Block>
+  <Line>
+    <P Name="ZOrder">1</P>
+    <P Name="Src">102#out:1</P>
+    <P Name="Dst">106#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">12</P>
+    <P Name="Src">106#out:1</P>
+    <P Name="Dst">107#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">13</P>
+    <P Name="Src">112#out:1</P>
+    <P Name="Dst">106#in:4</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">14</P>
+    <P Name="Src">110#out:1</P>
+    <P Name="Dst">106#in:2</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">15</P>
+    <P Name="Src">111#out:1</P>
+    <P Name="Dst">106#in:3</P>
+  </Line>
+</System>
